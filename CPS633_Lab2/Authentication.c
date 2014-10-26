@@ -3,6 +3,32 @@
 int enrollData[5][500][2];
 int verifyData[5][2500][2];
 
+void PopulateUserData();
+void ReadFile(int userNumber, double threshold);
+
+int main2()
+{
+	//TestACList();
+	CreateAccessControlMatrix();
+	PrintACLists();
+
+	PopulateUserData();
+	while(1)
+	{
+		int usernum = -1;
+		double input = -1;
+		printf("Please enter the user number and the threshold as a percentage: ");
+		scanf("%d %lf", &usernum, &input);
+		if (input == 0)
+		{
+			return 0;
+		}
+		//printf("Read in a %d\n", input);
+		ReadFile(usernum, input);
+	}
+	return 0;
+}
+
 void PopulateUserData()
 {
 	//read in data
@@ -43,7 +69,7 @@ void ReadFile(int userNumber, double threshold)
 	//char * str = (char*)calloc(100, sizeof(char));
 	//fgets(line, 100, file);
 	//sscanf(line, "%s", str);
-	
+
 	userNumber++;
 
 	//read in monitored data (verification phase)
@@ -102,24 +128,4 @@ void ReadFile(int userNumber, double threshold)
 	{
 		printf("An Equal Error Rate has not been achieved.\n");
 	}
-}
-
-int main()
-{
-	PopulateUserData();
-	while(1)
-	{
-		int usernum = -1;
-		double input = -1;
-		printf("Please enter the user number and the threshold as a percentage: ");
-		scanf("%d %lf", &usernum, &input);
-		if (input == 0)
-		{
-			return 0;
-		}
-		//printf("Read in a %d\n", input);
-		ReadFile(usernum, input);
-	}
-
-	return 0;
 }

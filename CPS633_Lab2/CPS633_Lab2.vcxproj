@@ -64,7 +64,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ACList.c" />
     <ClCompile Include="Authentication.c" />
+    <ClCompile Include="Authorization.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h" />
