@@ -1,8 +1,9 @@
 #include "Headers.h"
-
+//the access control linked lists for each different file in the system
 ACList* fileLists[6];
+//the matrix that contains all of the permissions in the system (each user and file)
 char* matrix[5][6];
-
+//the main loop the lets the user query the authorization system using the ACL implementation
 int mainAuthorization(char * username)
 {
 	char * filename = calloc(8, sizeof(char));
@@ -19,6 +20,7 @@ int mainAuthorization(char * username)
 	}
 	return 0;
 }
+//the main input loop that lets the user edit the matrix of the permissions
 int mainEditMatrix()
 {
 	char * filename = calloc(8, sizeof(char));
@@ -32,12 +34,11 @@ int mainEditMatrix()
 		{
 			return 0;
 		}
-		//AccessRequest(username, filename, permissions);
 		EditAccessMatrix(username, filename, permissions);
 	}
 	return 0;
 }
-
+//prints out the contents of every access control list
 void PrintACLists()
 {
 	for (int i = 0; i < 6; i++)
@@ -45,14 +46,14 @@ void PrintACLists()
 		PrintACL(fileLists[i]);
 	}
 }
-
+//reads in the access control matrix from the file and creates the access control lists accordingly
 void ReadAccessControlMatrix()
 {
 	for (int i = 0; i < 6; i++)
 	{
 		char name[7];
 		sprintf(name, "file%d", (i+1));
-		fileLists[i] = CreateACList(name);// +(i + 1));
+		fileLists[i] = CreateACList(name);
 	}
 
 	FILE * file = fopen("matrix.txt", "rt");
@@ -77,12 +78,12 @@ void ReadAccessControlMatrix()
 	}
 	fclose(file);
 }
-
+//gets the user's number from the username
 int stringNum(const char * str)
 {
 	return str[4] - '0';
 }
-
+//deletes all permissions from an access control list (removes the node entirely from the ACL)
 void DeletePermissions(ACList * list, const char * username)
 {
 	ACNode * temp = list->firstNode;
@@ -123,6 +124,7 @@ void DeletePermissions(ACList * list, const char * username)
 		}
 	}
 }
+//adds permission to an access control list (creates a new node in the linked list)
 void AddPermissions(ACList * list, const char * username, const char * permissions)
 {
 	int usernum = stringNum(username);
@@ -147,6 +149,7 @@ void AddPermissions(ACList * list, const char * username, const char * permissio
 		}
 	}
 }
+//edits permissions in the access control list (edits an existing node in the ACL)
 void EditPermissions(ACList * list, const char * username, const char * permissions)
 {
 	ACNode * temp = list->firstNode;
@@ -160,6 +163,7 @@ void EditPermissions(ACList * list, const char * username, const char * permissi
 		temp = temp->next;
 	}
 }
+//writes the new matrix file after it has been edited.
 void WriteMatrixFile(){
 	FILE * matrixFile;
 	if ((matrixFile = fopen("matrix.txt", "w")) == NULL)
@@ -177,7 +181,7 @@ void WriteMatrixFile(){
 	fclose(matrixFile);
 	return;
 }
-
+//edits the access matrix based on certain permissions, username and filename (involves updating the associated ACL and the access matrix)
 void EditAccessMatrix(const char * username, const char * filename, const char * permissions)
 {
 	int filenum = stringNum(filename) - 1;
@@ -209,7 +213,7 @@ void EditAccessMatrix(const char * username, const char * filename, const char *
 
 	WriteMatrixFile();
 }
-
+//makes an access request of a certain user to file with certain permissions, which will be checked against the access control list
 void AccessRequest(const char * username, const char * filename, const char * permissions)
 {
 	for (int i = 0; i < 6; i++)
@@ -261,12 +265,4 @@ void AccessRequest(const char * username, const char * filename, const char * pe
 	}
 	printf("The file was not found in the system.\n");
 
-}
-
-void TestACList()
-{
-	ACList * list = CreateACList("file1.txt");
-	AddACNode(list, "zharris", "rwx");
-	AddACNode(list, "dcamaren", "r-x");
-	PrintACL(list);
 }

@@ -1,13 +1,11 @@
 #include "Headers.h"
-
+//the threshold that will be input by the user and used in later calculations
 double threshold = 0.0;
-
-int main()//Commands()
+//the main loop which will allow the user to pick from a menu, to either edit the matrix or authenticate and enter either the ACL program or RBAC program
+int main()
 {
 	PopulateUserData();
-	//TestACList();
 	ReadAccessControlMatrix();
-	//PrintACLists();
 
 	while (1)
 	{
@@ -47,12 +45,9 @@ int main()//Commands()
 	}
 	return 0;
 }
-
+//the input loop which allows the user to attempt authentication with the OKAM system
 int mainLogin(char * username)
 {
-	//PopulateUserData();
-	//ReadAccessControlMatrix();
-	
 	int verfNum = 0;
 	printf("Please enter a threshold percentage value: ");
 	scanf("%lf", &threshold);

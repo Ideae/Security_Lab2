@@ -2,13 +2,17 @@
 #define ROLECOUNT 3
 #define USERCOUNT 5
 #define FILECOUNT 6
-
+//the string name representations of each role, indexed by role numbers
 char * roleNames[ROLECOUNT];
+//the table containing the roles each user has
 int userRoles[USERCOUNT][ROLECOUNT];
+//the table containing the permissions of each role for every file in the system
 char * rolePermissionsFiles[ROLECOUNT][FILECOUNT];
+//the table containing the role assignment permissions for every role
 int assignPermissionsRoles[ROLECOUNT][ROLECOUNT];
+//a flag to check whether the RBAC system was previously initialized
 int initPreviously = 0;
-
+//the input loop that lets the user interact with the RBAC authorization system
 int mainRBAC(char * username)
 {
 	if (!initPreviously++)
@@ -49,6 +53,7 @@ int mainRBAC(char * username)
 	}
 	return 0;
 }
+//allows a user to make an access control request through the RBAC system, taking into account their roles for the filename provided
 void RequestRBAC(const char * username, const char * filename, const char * permissions)
 {
 	int usernum = username[4] - '0' - 1;
@@ -93,6 +98,7 @@ void RequestRBAC(const char * username, const char * filename, const char * perm
 		printf(" access rights to the file '%s'\n", filename);
 	}
 }
+//allows a user logged into the system to change the role of a user, taking the RBAC rules into account (only one manager, etc)
 void SetRole(char * username, char * newrole)
 {
 	int rolenum = -1;
@@ -128,7 +134,7 @@ void SetRole(char * username, char * newrole)
 	userRoles[usernum][rolenum] = 1;
 	printf("%s has been given the new role %s\n", username, newrole);
 }
-
+//initializes the RBAC system and populates all associated tables with information
 void InitRBAC()
 {
 	roleNames[0] = calloc(10, sizeof(char));

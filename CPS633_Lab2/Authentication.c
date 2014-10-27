@@ -1,11 +1,11 @@
 #include "Headers.h"
-
+//contains the enrollment data of the 5 different users
 int enrollData[5][500][2];
+//contains the verification data of the 5 different users
 int verifyData[5][2500][2];
-
+//the main loop of the authentication OKAM system
 int mainAuthentication()
 {
-	//PopulateUserData();
 	while(1)
 	{
 		int usernum = -1;
@@ -16,12 +16,11 @@ int mainAuthentication()
 		{
 			return 0;
 		}
-		//printf("Read in a %d\n", input);
 		InitOKAM(usernum, input);
 	}
 	return 0;
 }
-
+//populate all the user data into the entrollment data and verfification data from the user data input files
 void PopulateUserData()
 {
 	//read in data
@@ -52,13 +51,10 @@ void PopulateUserData()
 		fclose(file);
 	}
 }
-
+//runs the OKAM system to find the FAR and FRR from the user data, based on the given threshold
 void InitOKAM(int userNumber, double threshold)
 {
-	//userNumber++; //?
 	userNumber--;
-
-	//read in monitored data (verification phase)
 	int falseRejects = 0;
 	for (int verifySet = 0; verifySet < 5; verifySet++)
 	{
@@ -115,7 +111,7 @@ void InitOKAM(int userNumber, double threshold)
 		printf("An Equal Error Rate has not been achieved.\n");
 	}
 }
-
+//attempt to login with the user data, given a usernumber (the user logging in), which verify set they will use to login, and the threshold
 int AttemptLogin(int userNumber, int verifySet, double threshold)
 {
 	double digraphSum = 0, monographSum = 0;

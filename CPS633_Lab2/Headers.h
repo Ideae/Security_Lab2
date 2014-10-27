@@ -40,7 +40,6 @@ ACList * CreateACList(const char * filename);
 ACNode * CreateACNode(const char * username, const char * permissions);
 void AddACNode(ACList * list, const char * username, const char * permissions);
 void PrintACL(ACList * list);
-void TestACList();
 void AccessRequest(const char * username, const char * filename, const char * permissions);
 void PrintACLists();
 void ReadAccessControlMatrix();

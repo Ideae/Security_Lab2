@@ -1,10 +1,17 @@
-﻿Build started 2014-10-27 6:04:55 AM.
+﻿Build started 2014-10-27 7:53:00 AM.
      1>Project "C:\Users\zacktibia\documents\visual studio 2013\Projects\CPS633_Lab2\CPS633_Lab2\CPS633_Lab2.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt RBAC.c
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt ACList.c Authentication.c Authorization.c Main.c RBAC.c
          RBAC.c
      1>c:\users\zacktibia\documents\visual studio 2013\projects\cps633_lab2\cps633_lab2\rbac.c(62): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\zacktibia\documents\visual studio 2013\projects\cps633_lab2\cps633_lab2\rbac.c(71): warning C4018: '<' : signed/unsigned mismatch
+         Main.c
+         Authorization.c
+     1>c:\users\zacktibia\documents\visual studio 2013\projects\cps633_lab2\cps633_lab2\authorization.c(230): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\zacktibia\documents\visual studio 2013\projects\cps633_lab2\cps633_lab2\authorization.c(236): warning C4018: '<' : signed/unsigned mismatch
+         Authentication.c
+         ACList.c
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\zacktibia\documents\visual studio 2013\Projects\CPS633_Lab2\Debug\CPS633_Lab2.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\zacktibia\documents\visual studio 2013\Projects\CPS633_Lab2\Debug\CPS633_Lab2.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\zacktibia\documents\visual studio 2013\Projects\CPS633_Lab2\Debug\CPS633_Lab2.lib" /MACHINE:X86 Debug\ACList.obj
          Debug\Authentication.obj
@@ -16,4 +23,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:00.32
+Time Elapsed 00:00:01.00

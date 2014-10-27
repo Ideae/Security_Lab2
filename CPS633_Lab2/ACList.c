@@ -1,16 +1,14 @@
 #include "Headers.h"
-
-
-
+//Create a new access control linked list
 ACList * CreateACList(const char * filename)
 {
 	ACList * list = malloc(sizeof(ACList));
-	//check later if the +1 is necessary
 	list->filename = calloc(strlen(filename) + 1, sizeof(char));
 	strcpy(list->filename, filename);
 	list->firstNode = NULL;
 	return list;
 }
+//create a new node in the access control linked list
 ACNode * CreateACNode(const char * username, const char * permissions)
 {
 	ACNode * node = malloc(sizeof(ACNode));
@@ -21,16 +19,11 @@ ACNode * CreateACNode(const char * username, const char * permissions)
 	node->next = NULL;
 	return node;
 }
+//add a node to the end of a access control linked list
 void AddACNode(ACList * list, const char * username, const char * permissions)
 {
 	if (list == NULL) return;
 
-	//ACNode * node = malloc(sizeof(ACNode));
-	//node->username = calloc(sizeof(username) + 1, sizeof(char));
-	//strcpy(node->username, username);
-	//node->permissions = calloc(sizeof(permissions) + 1, sizeof(char));
-	//strcpy(node->permissions, permissions);
-	//node->next = NULL;
 	ACNode * node = CreateACNode(username, permissions);
 
 	if (list->firstNode == NULL)
@@ -47,7 +40,7 @@ void AddACNode(ACList * list, const char * username, const char * permissions)
 		temp->next = node;
 	}
 }
-
+//print out the contents of an access control linked list
 void PrintACL(ACList * list)
 {
 	if (list == NULL) return;
@@ -65,5 +58,4 @@ void PrintACL(ACList * list)
 			temp = temp->next;
 		}
 	}
-
 }
