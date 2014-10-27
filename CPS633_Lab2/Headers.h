@@ -21,8 +21,10 @@ typedef struct ACList{
 } ACList;
 
 int mainAuthentication();
-int mainAuthorization();
+int mainAuthorization(char * username);
 int mainEditMatrix();
+int mainRBAC(char * username);
+int mainLogin(char * username);
 
 void PopulateUserData();
 void InitOKAM(int userNumber, double threshold);
@@ -42,3 +44,7 @@ void TestACList();
 void AccessRequest(const char * username, const char * filename, const char * permissions);
 void PrintACLists();
 void ReadAccessControlMatrix();
+
+void InitRBAC();
+void SetRole(char * username, char * newrole);
+void RequestRBAC(const char * username, const char * filename, const char * permissions);

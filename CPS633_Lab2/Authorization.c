@@ -3,16 +3,15 @@
 ACList* fileLists[6];
 char* matrix[5][6];
 
-int mainAuthorization()
+int mainAuthorization(char * username)
 {
 	char * filename = calloc(8, sizeof(char));
-	char * username = calloc(8, sizeof(char));
 	char * permissions = calloc(8, sizeof(char));
 	while (1)
 	{
-		printf("Please enter access request as follows: filename username permissions\n");
-		scanf("%s %s %s", filename, username, permissions);
-		if (filename[0] == '0' && username[0] == '0' && permissions[0] == '0')
+		printf("Please enter access request as follows (0 0 to exit):\nfilename permissions\n");
+		scanf("%s %s", filename, permissions);
+		if (filename[0] == '0' && permissions[0] == '0')
 		{
 			return 0;
 		}
@@ -27,7 +26,7 @@ int mainEditMatrix()
 	char * permissions = calloc(8, sizeof(char));
 	while (1)
 	{
-		printf("Please enter a new permission or edit an existing one with:\nfilename username permissions\n");
+		printf("Please enter a new permission or edit an existing one with (0 0 0 to exit):\nfilename username permissions\n");
 		scanf("%s %s %s", filename, username, permissions);
 		if (filename[0] == '0' && username[0] == '0' && permissions[0] == '0')
 		{
@@ -59,7 +58,6 @@ void ReadAccessControlMatrix()
 	FILE * file = fopen("matrix.txt", "rt");
 	if (file == NULL) return;
 	char line[100];
-	char newLine = '\n';
 	
 	for (int i = 0; i < 5; i++)
 	{
@@ -69,7 +67,6 @@ void ReadAccessControlMatrix()
 			matrix[i][j] = calloc(4, sizeof(char));
 		}
 		sscanf(line, "%s %s %s %s %s %s", matrix[i][0], matrix[i][1], matrix[i][2], matrix[i][3], matrix[i][4], matrix[i][5]);
-		//printf("%s %s %s %s %s %s\n", matrix[i][0], matrix[i][1], matrix[i][2], matrix[i][3], matrix[i][4], matrix[i][5]);
 		for (int j = 0; j < 6; j++)
 		{
 			if (strcmp(matrix[i][j], "-") == 0) continue;

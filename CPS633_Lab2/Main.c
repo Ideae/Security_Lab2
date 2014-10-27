@@ -12,17 +12,25 @@ int main()//Commands()
 	while (1)
 	{
 		printf("Security Lab2: Enter a command:\n");
-		printf("0. Exit program\n1. Login\n2. Authorization\n3. Edit Access Control Matrix\n4. Print Access Control Lists\n5. Authentication Setup\n> ");
+		printf("0. Exit program\n1. Login ACL\n2. Login RBAC\n3. Edit Access Control Matrix\n4. Print Access Control Lists\n5. Authentication Setup\n> ");
 		int command = -1;
 		scanf("%d", &command);
 		if (command == 0) return 0;
 		if (command == 1)
 		{
-			mainLogin();
+			char * username = calloc(8, sizeof(char));
+			if (mainLogin(username))
+			{
+				mainAuthorization(username);
+			}
 		}
 		else if (command == 2)
 		{
-			mainAuthorization();
+			char * username = calloc(8, sizeof(char));
+			if (mainLogin(username))
+			{
+				mainRBAC(username);
+			}
 		}
 		else if (command == 3)
 		{
@@ -40,32 +48,28 @@ int main()//Commands()
 	return 0;
 }
 
-int mainLogin()
+int mainLogin(char * username)
 {
 	//PopulateUserData();
 	//ReadAccessControlMatrix();
-	char * username = calloc(8, sizeof(char));
-	while (1)
+	
+	int verfNum = 0;
+	printf("Please enter a threshold percentage value: ");
+	scanf("%lf", &threshold);
+	printf("Please login. username: ");
+	scanf("%s", username);
+	printf("Verification number (1-5): ");
+	scanf("%d", &verfNum);
+	int result = AttemptLogin(username[4] - '0', verfNum - 1, threshold);
+	if (result == 1)
 	{
-		int verfNum = 0;
-		printf("Please enter a threshold percentage value: ");
-		scanf("%lf", &threshold);
-		printf("Please login. username: ");
-		scanf("%s", username);
-		printf("Verification number (1-5): ");
-		scanf("%d", &verfNum);
-		int result = AttemptLogin(username[4] - '0', verfNum - 1, threshold);
-		if (result == 1)
-		{
-			printf("Access Granted!\n");
-		}
-		else
-		{
-			printf("Access Failed!\n");
-		}
-		//InitOKAM(username[4] - '0', threshold);
+		printf("Access Granted!\n");
+		return 1;
 	}
-	int num = 0;
-	scanf("%d", &num);
+	else
+	{
+		printf("Access Failed!\n");
+		return 0;
+	}
 	return 0;
 }

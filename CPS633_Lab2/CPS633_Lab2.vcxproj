@@ -68,6 +68,7 @@
     <ClCompile Include="Authentication.c" />
     <ClCompile Include="Authorization.c" />
     <ClCompile Include="Main.c" />
+    <ClCompile Include="RBAC.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h" />
