@@ -11,16 +11,27 @@ ACList * CreateACList(const char * filename)
 	list->firstNode = NULL;
 	return list;
 }
-void AddACNode(ACList * list, const char * username, const char * permissions)
+ACNode * CreateACNode(const char * username, const char * permissions)
 {
-	if (list == NULL) return;
-
 	ACNode * node = malloc(sizeof(ACNode));
 	node->username = calloc(sizeof(username) + 1, sizeof(char));
 	strcpy(node->username, username);
 	node->permissions = calloc(sizeof(permissions) + 1, sizeof(char));
 	strcpy(node->permissions, permissions);
 	node->next = NULL;
+	return node;
+}
+void AddACNode(ACList * list, const char * username, const char * permissions)
+{
+	if (list == NULL) return;
+
+	//ACNode * node = malloc(sizeof(ACNode));
+	//node->username = calloc(sizeof(username) + 1, sizeof(char));
+	//strcpy(node->username, username);
+	//node->permissions = calloc(sizeof(permissions) + 1, sizeof(char));
+	//strcpy(node->permissions, permissions);
+	//node->next = NULL;
+	ACNode * node = CreateACNode(username, permissions);
 
 	if (list->firstNode == NULL)
 	{
@@ -40,7 +51,7 @@ void AddACNode(ACList * list, const char * username, const char * permissions)
 void PrintACL(ACList * list)
 {
 	if (list == NULL) return;
-	printf("ACL for the file: %s:\n", list->filename);
+	printf("%s:\n", list->filename);
 	if (list->firstNode == NULL)
 	{
 		printf("\tNo permissions found.\n");
@@ -50,7 +61,7 @@ void PrintACL(ACList * list)
 		ACNode * temp = list->firstNode;
 		while (temp != NULL)
 		{
-			printf("\tUsername:%10s Permissions:%5s\n", temp->username, temp->permissions);
+			printf("\t%10s %5s\n", temp->username, temp->permissions);
 			temp = temp->next;
 		}
 	}

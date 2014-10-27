@@ -3,16 +3,9 @@
 int enrollData[5][500][2];
 int verifyData[5][2500][2];
 
-void PopulateUserData();
-void ReadFile(int userNumber, double threshold);
-
-int main2()
+int mainAuthentication()
 {
-	//TestACList();
-	CreateAccessControlMatrix();
-	PrintACLists();
-
-	PopulateUserData();
+	//PopulateUserData();
 	while(1)
 	{
 		int usernum = -1;
@@ -24,7 +17,7 @@ int main2()
 			return 0;
 		}
 		//printf("Read in a %d\n", input);
-		ReadFile(usernum, input);
+		InitOKAM(usernum, input);
 	}
 	return 0;
 }
@@ -60,26 +53,19 @@ void PopulateUserData()
 	}
 }
 
-void ReadFile(int userNumber, double threshold)
+void InitOKAM(int userNumber, double threshold)
 {
-	//FILE * file = fopen("user_data//user1.txt", "rt");
-	//if (file == NULL) return;
-	//char line[100];
-	//char newLine = '\n';
-	//char * str = (char*)calloc(100, sizeof(char));
-	//fgets(line, 100, file);
-	//sscanf(line, "%s", str);
-
-	userNumber++;
+	//userNumber++; //?
+	userNumber--;
 
 	//read in monitored data (verification phase)
 	int falseRejects = 0;
-	for (int verfySet = 0; verfySet < 5; verfySet++)
+	for (int verifySet = 0; verifySet < 5; verifySet++)
 	{
 		double digraphSum = 0, monographSum = 0;
 		for (int i = 0; i < 500; i++)
 		{
-			int index = 500 * verfySet + i;
+			int index = 500 * verifySet + i;
 			int fly = verifyData[userNumber][index][0];
 			int dwell = verifyData[userNumber][index][1];
 			if (fly != 0) digraphSum += (abs(fly - enrollData[userNumber][i][0])) / (double)fly;
@@ -128,4 +114,23 @@ void ReadFile(int userNumber, double threshold)
 	{
 		printf("An Equal Error Rate has not been achieved.\n");
 	}
+}
+
+int AttemptLogin(int userNumber, int verifySet, double threshold)
+{
+	double digraphSum = 0, monographSum = 0;
+	for (int i = 0; i < 500; i++)
+	{
+		int index = 500 * verifySet + i;
+		int fly = verifyData[userNumber][index][0];
+		int dwell = verifyData[userNumber][index][1];
+		if (fly != 0) digraphSum += (abs(fly - enrollData[userNumber][i][0])) / (double)fly;
+		if (dwell != 0) monographSum += (abs(dwell - enrollData[userNumber][i][1])) / (double)dwell;
+	}
+	double D = ((digraphSum / 499.0) + (monographSum / 500.0)) * 50.0;
+	if (D <= threshold)
+	{
+		return 1;
+	}
+	return 0;
 }

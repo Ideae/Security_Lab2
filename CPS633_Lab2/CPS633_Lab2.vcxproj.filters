@@ -24,6 +24,9 @@
     <ClCompile Include="Authorization.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Headers.h">

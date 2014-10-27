@@ -20,11 +20,25 @@ typedef struct ACList{
 	ACNode * firstNode;
 } ACList;
 
+int mainAuthentication();
+int mainAuthorization();
+int mainEditMatrix();
+
+void PopulateUserData();
+void InitOKAM(int userNumber, double threshold);
+int AttemptLogin(int userNumber, int verifySet, double threshold);
+
+void DeletePermissions(ACList * list, const char * username);
+void AddPermissions(ACList * list, const char * username, const char * permissions);
+void EditPermissions(ACList * list, const char * username, const char * permissions);
+void WriteMatrixFile();
+void EditAccessMatrix(const char * username, const char * filename, const char * permissions);
 
 ACList * CreateACList(const char * filename);
+ACNode * CreateACNode(const char * username, const char * permissions);
 void AddACNode(ACList * list, const char * username, const char * permissions);
 void PrintACL(ACList * list);
 void TestACList();
 void AccessRequest(const char * username, const char * filename, const char * permissions);
 void PrintACLists();
-void CreateAccessControlMatrix();
+void ReadAccessControlMatrix();

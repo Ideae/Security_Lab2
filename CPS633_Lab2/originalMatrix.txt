@@ -1,0 +1,5 @@
+rwx rwx rwx rwx rwx rwx 
+rw - rx - r - 
+- - rw rw - -
+rx - - r r -
+- rwx - r - r
